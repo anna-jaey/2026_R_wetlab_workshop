@@ -1,0 +1,230 @@
+---
+title: "Example Dataset"
+  html:
+    toc: true # table of content
+    toc-depth: 2 # up to 2 levels in the table of content
+    code-fold: true
+    code-tools: true
+    embed-resources: false
+    page-layout: full
+    lightbox: true
+    execute:
+      freeze: auto
+      cache: false
+---
+
+
+```{r setup}
+# load libraries
+```
+
+# Example data
+
+**Experiment:** Control vs Treatment medium. IF stain for a marker and DAPI for nuclei.
+
+**Using Fiji we measured for each image:**
+- `RawIntDen` – total marker signal
+- `n_cells` – number of cells
+
+Data is located in ./data/example_data.csv
+
+# 1) Read in data
+
+```{r}
+# hint: use read.csv
+```
+
+# 2) Explore the object
+
+* View the object, print first rows, last rows
+
+```{r}
+
+```
+
+* How many rows and columns does the object have?
+
+```{r}
+
+```
+
+* How many measurements are in the dataframe? What does this number mean?
+
+```{r}
+
+```
+
+* What are the names of the columns?
+
+```{r}
+
+```
+
+
+# 3) Inspect the data
+
+* Are there any missing values? If yes, how many and for which measurement?
+
+```{r}
+
+```
+
+* Are they missing in the same image?
+
+```{r}
+
+```
+
+* How many cells were counted all together?
+
+```{r}
+
+```
+
+* What is the size of image? Is the the same for all images?
+
+```{r}
+
+```
+
+
+* Calculate mean, standard deviation, median, and IQR for cell counts and RawIntDen - overall
+
+```{r}
+# hint: think about the NA's
+
+```
+
+
+* and for each experimental group
+
+```{r}
+# hint: group_by
+
+```
+
+# 4) Plot the raw data
+
+* scatterplot cell count vs raw int den
+
+```{r}
+ggplot(img_data)+
+  geom_point(aes(x=n_cells, y=rawintden_marker)) 
+```
+there is warning. did you see it? What does it mean?
+
+what do you observe?
+
+Is the distribution it different for each group?
+
+```{r}
+# hint: colour by experimental group
+ 
+```
+
+What could be the reason for the 5 datapoints close to 0?
+Find them
+
+```{r}
+
+```
+
+
+Exclude them from further analysis
+
+```{r}
+# hint: think about which rows to exclude
+
+```
+
+
+# 5) Normalise rawintden data for better comparison 
+
+As each image has different number of cells, but we want to see the effect of the experimental treatment on the marker expression, we need to normalise rawintden per number of nuclei for each image
+
+```{r}
+# hint: create a new column with the normalised data
+
+
+```
+
+As before, calculate mean, median, SD and IQR of the normalised data for each group
+
+```{r}
+
+```
+
+# 6) Graph the normalised data
+
+Create a bargraph of mean normalised raw int den with errorbars for SD dev one bar per group
+
+```{r}
+# hint: think layers
+```
+
+
+Add the data points to the graph
+
+```{r}
+# hint: different layers can take different objects, use data = [your object], and aes(x =, y =)
+# hint: colour the points
+
+```
+
+Label the axis
+
+```{r}
+
+```
+
+Create a  "pretty" graph
+
+```{r}
+# hint: layers are created in order
+
+```
+
+You can set the width and height also in here
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+
+```
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+
+```
+
+# 7) Save data and graphs
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+# 8) Render
+
+try to press render at the top to create a html file will all your work
+Bonus question: where else can you find your graph(s)? (other than the export folder)
+
+# 9) Bonus
+
+The file `./data/img_data_3experiments.csv` contains mean and SD of 3 experiments (control vs treated).
+
+**Tasks:**
+1. Read and explore the data
+2. Check assumptions for statistics:
+   - independent samples - is given as independent experiments
+   - Normality (Shapiro-Wilk test per group)
+   - Homogeneity of variance (Levene's test)
+3. Perform t-test (Welch's or Student's depending on Levene)
+4. Create a bar/boxplot graph with t-test p-value displayed
+
+```{r}
+
+```

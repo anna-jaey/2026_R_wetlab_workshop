@@ -1,0 +1,275 @@
+---
+title: "Basic Concepts"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Basic Concepts in Practise
+
+## iris example data set
+
+The Iris dataset consists of 150 samples from three species of iris flowers: Iris setosa, Iris versicolor, and Iris virginica. Each sample includes measurements of sepal length, sepal width, petal length, and petal width. It is very often used as an example in teaching.
+
+Learn more [here](https://en.wikipedia.org/wiki/Iris_flower_data_set)
+
+Run code in the console. However, rmd run the code inline. Same thing, different location. 
+
+Example for now: The iris dataset.
+It is included in R. That means it is "somewhere" stored on your computer and you can access it by typing:
+
+```{r}
+
+```
+
+* store it in a variable
+
+```{r}
+
+```
+
+* and now we can easily access it to view it
+
+```{r}
+
+```
+
+* what can we do with it?
+
+```{r}
+
+```
+
+* summary is a function. we can learn more about summary:
+
+```{r}
+
+```
+
+Now we would like to calculate the overall mean sepal length (across all species). How do we do that?
+* We need to access the sepal length column of the iris data.
+
+```{r}
+
+```
+
+* now we can get all the measurements of the sepal length. Let's write them to a variable
+
+```{r}
+
+```
+
+iris_data is a data frame. It has rows and columns.
+sepal_length_data is a vector. It is a long list of numbers. There is no other information (like species)
+
+* Now let's calculate mean, median, min and max, standard deviation
+
+```{r}
+
+```
+
+* Again, all of those we can assign to variables
+
+```{r}
+
+```
+
+* but what about the different species? We can subset the data frame
+
+```{r}
+
+```
+
+* We can even get the column means, that is the mean of each measurement 
+
+```{r}
+
+```
+
+* Let's do some very basic plots
+
+```{r}
+
+```
+
+* Let's add a legend
+
+```{r}
+
+```
+
+* Another plot:
+If we use Species as x, R knows Species is categorical, so it creates a boxplot instead of a scatter plot.
+
+```{r}
+
+```
+
+* How to save a plot?
+
+1) Rstudio export
+2) Code
+
+```{r}
+
+```
+
+
+What if we want to do more advanced? Complex operations but nicer, easier to read code? That's where packages come in.
+
+We can use packages. We can use tidyverse: 
+["The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures."](https://tidyverse.org/)
+
+
+```{r}
+
+```
+
+tidyverse has it's own syntax and functions for everything.
+For example we want to retrieve only the measurements for setosa species.
+
+```{r}
+
+```
+
+
+The pipe operator `%>%` is your friend for everything. You remember the summary function?
+
+```{r}
+
+```
+
+You remember calculating mean, median, min and max? Let's try this for each species and also add the SD
+
+```{r}
+
+```
+
+and let's add this to a new variable
+
+```{r}
+
+```
+
+you can also select certain columns
+
+```{r}
+
+```
+
+
+ggplot2 is THE package for plots
+
+ggplot2 works in layers:
+1. Data – what dataset?
+2. Aesthetics (aes) – what goes on x, y, colour?
+3. Geometries (geom_point, geom_boxplot) – what type of plot?
+4. Themes – how does it look?
+
+so if we want to plot the scatter plot above but with ggplot2:
+```{r}
+
+```
+
+Note that this also works:
+```{r}
+
+```
+
+we can even assign a plot to a variable to store it for later:
+
+```{r}
+
+```
+
+Now we can add labels and move the legend
+
+```{r}
+
+```
+
+There are many possibilities to create the most beautiful graphs
+
+The other graph from above:
+
+```{r}
+
+```
+
+
+saving the plots is same as before
+1) RStudio
+2) code
+
+```{r}
+
+```
+
+saving data
+1) export dataframes (tables) as csv
+
+```{r}
+
+```
+other formats are possible (see below)
+
+2) RDS files: save a single R object (one dataframe, one plot, one model). Keeps everything exactly as it was. Load back with readRDS().
+
+```{r}
+
+```
+
+
+3) RData: save multiple objects at once. Load restores original variable names automatically
+
+But remember our best practices slide – I recommend against this. It encourages bad habits like saving your whole workspace."
+```{r}
+
+```
+
+One quick warning, saving workspace image (.RData on exit) is a bad habit.
+
+
+few more words on how to get data into R:
+
+internal examples, like iris. There are many more:
+
+```{r}
+
+```
+
+create your own data frame:
+
+```{r}
+
+```
+
+read local data.
+here package can help you. It makes relative paths easy. It finds your project root.
+
+```{r}
+
+```
+
+list files is also useful
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+Other formats:
+
+* Excel files: install.packages("readxl")
+* SPSS/Stata/SAS files: install.packages("haven")
+* Google sheets: install.packages("googlesheets4")
+* Copy and paste using datapasta: install.packages("datapasta")
+
+
